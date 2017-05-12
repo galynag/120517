@@ -81,7 +81,9 @@ var goods = {
 	 	"new" : 0
 	 }
  };
+var rezMass={};
 window.onload = function() {
+	//удалить массив rezMass
     var out='';
 for (var key in goods) {
 	out+='<div class="item';
@@ -107,9 +109,7 @@ var pol=document.querySelector('#polzunok');
     }
 
     document.querySelector('#filter').onclick=function() {
-		var rezMass={};
-		// rezz.hhbhb =
-        var out='';
+		var out='';
         var pL='';
         var produserslist=document.querySelectorAll('.produser input');
         var listProdesers=document.querySelectorAll('.produser');
@@ -127,9 +127,8 @@ var pol=document.querySelector('#polzunok');
 			var prod=goods[key].producer;
 			var battery=goods[key].batteries;
         	if (goods[key].cost_2<=pol.value && pL.indexOf(prod)>=0 && goods[key].batteries==typeBattery) {
-                // localStorage.setItem(key, goods[key].cost_2);
-                // console.log(localStorage);
-                rezMass[key].name=goods[key].name;
+                rezMass[key]={};
+                rezMass[key].name =goods[key].name;
                 rezMass[key].producer=goods[key].producer;
                 rezMass[key].name2=goods[key].name2;
                 rezMass[key].cost_1=goods[key].cost_1;
@@ -137,7 +136,7 @@ var pol=document.querySelector('#polzunok');
                 rezMass[key].batteries=goods[key].batteries;
                 rezMass[key].image=goods[key].image;
                 rezMass[key].new=goods[key].new;
-                consol.log(rezMass);
+                console.log(rezMass);
                 out += '<div class="item">';
                 out += '<img src="img/' + goods[key].image + '" alt="">';
                 out += '<div class="name-item">' + goods[key].name+ goods[key].producer+goods[key].batteries+ '<span class="item-article">' + '\n' + goods[key].name2 + '</span></div>';
@@ -148,6 +147,33 @@ var pol=document.querySelector('#polzunok');
         }
         document.querySelector('.catalog').innerHTML=out;
 	}
-	document.querySelector('.triangle-top').onclick= function() {
 
-	}
+
+	document.querySelector('.triangle-top').onclick= function() {
+    	var out1='';
+        var keys = [];
+
+        for (var key in rezMass) {
+            keys.push(rezMass[key]);
+        }
+            keys.sort(function (a, b) {
+                return a.cost_2- b.cost_2;
+            });
+            console.log(keys);
+		for (var i=0; i<keys.length; i++) {
+            out1+='<div class="item';
+            if (keys[i].new==1) {
+                out1+=' new';
+            }
+            out1+='"><img src="img/'+keys[i].image+'" alt="">';
+            out1+='<div class="name-item">'+keys[i].name+'<span class="item-article">'+'\n'+keys[i].name2+'</span></div>';
+            if (keys[i].cost_1) {
+            	out1+='<div class="old-price">'+keys[i].cost_1+'</div>';
+            }
+            out1+='<div class="new-price"><div class="block-new-price">'+keys[i].cost_2+'</div>';
+            out1+='<div class="triangle-right"></div></div><div class="new"></div></div>';
+                    }
+        document.querySelector('.catalog').innerHTML=out1;
+		}
+
+
