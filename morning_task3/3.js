@@ -12,19 +12,14 @@ var arr = {
 	"k14" : "1w37",
 	"3k1" : "1wrw7"
 }
-var arrStr=[];
-for (var key in arr) {
-	console.log(arr);
-}
+console.log(arr);
+
 var mass=JSON.stringify(arr);
-console.log(mass);
 localStorage.setItem('mass', mass);
 var primer = localStorage.getItem('mass');
-console.log(typeof primer);
-console.log(primer);
 var arr2=JSON.parse(primer);
-console.log(typeof arr2);
 console.log(arr2);
+
 
 
 
