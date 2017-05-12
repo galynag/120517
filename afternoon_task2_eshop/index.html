@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<section>
+
+    <div class="container">
+        <div class="name-box">
+            <h1>перфораторы</h1>
+        </div>
+        <div class="filters col3">
+            <p class="row38">ФИЛЬТРЫ:</p>
+            <input id="polzunok" type="range" min="0" max="30000" step="1" value="0">
+            <div class="polzun" id="min-pol">0</div>
+
+            <div class="polzun" id="max-pol"></div>
+            <ul>
+                <li class="produser"><input type="checkbox">Metabo</li>
+                <li class="produser"><input type="checkbox">Титан</li>
+                <li class="produser"><input type="checkbox">Днепр-М</li>
+                <li class="produser"><input type="checkbox">Craft</li>
+                <li class="produser"><input type="checkbox">TexAc</li>
+                <li class="produser"><input type="checkbox" checked>Bosch</li>
+            </ul>
+            <ul>
+                <li class="battary"><input type="radio" name="type-battery" value="1" checked>Аккумуляторные</li>
+                <li class="battery"><input type="radio" name="type-battery" value="0">Сетевые</li>
+            </ul>
+            <button id="filter">ПОКАЗАТЬ</button>
+        </div>
+        <div class="catalog-container col9">
+            <div class="row38">ФИЛЬТРЫ:<div class="triangle-top"></div></div>
+            <div class="catalog"></div>
+        </div>
+    </div>
+</section>
+<script src="goods.js"></script>
+</body>
+</html>
