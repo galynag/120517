@@ -85,10 +85,25 @@ var goods = {
 var rezMass={};
 var triangleBottom=document.querySelector('.triangle-bottom');
 var triangleTop=document.querySelector('.triangle-top');
+
+function unique(arr) {
+  var obj = {};
+
+  for (var i = 0; i < arr.length; i++) {
+    var str = arr[i];
+    obj[str] = true; // запомнить строку в виде свойства объекта
+  }
+
+  return Object.keys(obj); // или собрать ключи перебором для IE8-
+}
 //при загрузке страницы
 window.onload = function() {
 	var out='';
+	var outP=[];//массив для определения в дальнейшем уникальных производителей
+	var outPString='';//строка для запоминания формы элемнтов списка фильтра для всех уникальных производителей
 	for (var key in goods) {
+		 outP.push(goods[key].producer);
+		 console.log();
 		 out+='<div class="item"><img src="img/'+goods[key].image+'" alt="">';
 	   if (goods[key].new==1) {
 	       out+='<img id="img-new" src="img/new.png" alt="">';
@@ -103,6 +118,12 @@ window.onload = function() {
 		 out+='<div class="triangle-right"></div></div><div class="new"></div></div>';
 	 }
 document.querySelector('.catalog').innerHTML=out;
+outP = unique(outP);
+for (var i=0; i<outP.length; i++) {
+	outPString+='<li class="produser"><input type="checkbox">'+outP[i]+'</li>';
+}
+
+document.querySelector('#produser').innerHTML=outPString;
 };
 
 
