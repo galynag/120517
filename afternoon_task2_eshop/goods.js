@@ -89,12 +89,13 @@ var triangleTop=document.querySelector('.triangle-top');
 window.onload = function() {
 	var out='';
 	for (var key in goods) {
-		 out+='<div class="item';
+		 out+='<div class="item"><img src="img/'+goods[key].image+'" alt="">';
 	   if (goods[key].new==1) {
-	        out+=' new';
+	       out+='<img id="img-new" src="img/new.png" alt="">';
 		  }
-		 out+='"><img src="img/'+goods[key].image+'" alt="">';
-		 out+='<div class="name-item">'+goods[key].name+'<span class="item-article">'+'\n'+goods[key].name2+'</span></div>';
+		out+='<div class="name-item">' + goods[key].name+'</div>';
+		out+='<div class="produser">'+goods[key].producer+'</div>';
+		out+='<div class="item-article">'+ goods[key].name2 +'</div>';
 		 if (goods[key].cost_1!=0) {
 		      out+='<div class="old-price">'+goods[key].cost_1+'</div>';
 		 } else { out += '<div class="old-price">&#160;</div>';}
@@ -142,12 +143,13 @@ document.querySelector('#filter').onclick=function() {
 		     rezMass[key].batteries=goods[key].batteries;
 		     rezMass[key].image=goods[key].image;
 		     rezMass[key].new=goods[key].new;
-		     out += '<div class="item">';
-				 if (goods[key].new==1) {
-							out+=' new';
-					}
-		     out += '<img src="img/' + goods[key].image + '" alt="">';
-		     out += '<div class="name-item">' + goods[key].name+ goods[key].producer+goods[key].batteries+ '<span class="item-article">' + '\n' + goods[key].name2 + '</span></div>';
+				 out+='<div class="item"><img src="img/'+goods[key].image+'" alt="">';
+			 	 if (goods[key].new==1) {
+			 			out+='<img id="img-new" src="img/new.png" alt="">';
+			 	 }
+				out+='<div class="name-item">'+goods[key].name+'</div>';
+				out+='<div class="produser">'+goods[key].producer+'</div>';
+				out+='<div class="item-article">'+ goods[key].name2 +'</div>';
 				 if (goods[key].cost_1!=0) {
 				  out += '<div class="old-price">' + goods[key].cost_1 + '</div>';
 				 } else {out += '<div class="old-price">&#160;</div>';}
@@ -169,7 +171,6 @@ Object.size = function(obj) {
 triangleTop.onclick= function() {
 	var out1='';
 	var keys = [];
-	console.log(rezMass);
 	var sizeObj = Object.size(rezMass);
  //проверка на наличие отсортированного списка элементов. если у нас сортировка на странице не была применена, то мы берем все товары.
  if (sizeObj >0) {
@@ -179,7 +180,6 @@ triangleTop.onclick= function() {
 		}
 	} else {	for (var key in goods)  {
 				  	keys.push(goods[key]);
-						console.log(keys)				;
 					}
 		}
 	//сортируем полученный массив по цене.
@@ -187,12 +187,13 @@ triangleTop.onclick= function() {
 		return a.cost_2- b.cost_2;
 	  });
   for (var i=0; i<keys.length; i++) {
-	  out1+='<div class="item';
-	  if (keys[i].new==1) {
-	     out1+=' new';
-	  }
-	  out1+='"><img src="img/'+keys[i].image+'" alt="">';
-	  out1+='<div class="name-item">'+keys[i].name+'<span class="item-article">'+'\n'+keys[i].name2+'</span></div>';
+		out1+='<div class="item"><img src="img/'+keys[i].image+'" alt="">';
+		if (keys[i].new==1) {
+				out1+='<img id="img-new" src="img/new.png" alt="">';
+		 }
+		out1+='<div class="name-item">'+keys[i].name+'</div>';
+ 		out1+='<div class="produser">'+keys[i].producer+'</div>';
+ 		out1+='<div class="item-article">'+ keys[i].name2 +'</div>';
 	  if (keys[i].cost_1) {
 			out1+='<div class="old-price">'+keys[i].cost_1+'</div>';
 	  } else {out1+='<div class="old-price">&#160;</div>';}
@@ -205,7 +206,6 @@ document.querySelector('.catalog').innerHTML=out1;
 triangleBottom.onclick= function() {
 	var out1='';
 	var keys = [];
-	console.log(rezMass);
 	var sizeObj = Object.size(rezMass);
  //проверка на наличие отсортированного списка элементов. если у нас сортировка на странице не была применена, то мы берем все товары.
  if (sizeObj >0) {
@@ -223,12 +223,13 @@ triangleBottom.onclick= function() {
 		return b.cost_2- a.cost_2;
 	  });
   for (var i=0; i<keys.length; i++) {
-	  out1+='<div class="item';
-	  if (keys[i].new==1) {
-	     out1+=' new';
+		out1+='<div class="item"><img src="img/'+keys[i].image+'" alt="">';
+		if (keys[i].new==1) {
+			out1+='<img id="img-new" src="img/new.png" alt="">';
 	  }
-	  out1+='"><img src="img/'+keys[i].image+'" alt="">';
-	  out1+='<div class="name-item">'+keys[i].name+'<span class="item-article">'+'\n'+keys[i].name2+'</span></div>';
+		out1+='<div class="name-item">' + keys[i].name+'</div>';
+		out1+='<div class="produser">'+keys[i].producer+'</div>';
+		out1+='<div class="item-article">'+ keys[i].name2 +'</div>';
 	  if (keys[i].cost_1 != 0) {
 	    	out1+='<div class="old-price">'+keys[i].cost_1+'</div>';
 		} else {out1+='<div class="old-price">&#160;</div>';}

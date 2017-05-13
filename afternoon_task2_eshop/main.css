@@ -58,7 +58,10 @@ h1 {
 }
 ul {
   border-top: 1px solid lightgrey;
-  padding: 20px
+  padding: 20px;
+}
+.bold {
+  font-weight: bold;
 }
 /*input[type=range] {*/
     /*-webkit-appearance: none;*/
@@ -79,7 +82,7 @@ input.polzun{
   float: left;
 }
 div.polzun {
-  width: 100px;
+  width: 45%;
   text-align: center;
   float: left;
   background-color:#f7f3ec;
@@ -87,7 +90,16 @@ div.polzun {
 li {
     list-style: none;
 }
-section:after, .catalog:after, filters:after, .catalog-container:after {
+.produser, .battery {
+  padding: 0.7em 0;
+}
+.produser input, .battery input {
+  margin-right: 0.5em;
+  width: 1em;
+  height: 1em;
+}
+
+.container::after, section:after, .catalog:after, filters:after, .catalog-container:after {
     content: '';
     clear: both;
     display: block;
@@ -97,8 +109,12 @@ section:after, .catalog:after, filters:after, .catalog-container:after {
 }
 .filters p {
     background: #f7f3ec;
+    padding-left: 1em;
 }
-
+.filters button {
+  padding: 0.2em 0.5em;
+  margin: 1em;
+}
 
 .item {
     margin: 10px;
@@ -110,18 +126,20 @@ section:after, .catalog:after, filters:after, .catalog-container:after {
     border-left: 1px solid #e5e5e5;
     border-right: 1px solid #e5e5e5;
     text-align: center;
+    position: relative;
 }
-.new {
-    background: url(img/new.png) no-repeat right top;
-    background-size: 30%;
- }
-
+#img-new {
+  position: absolute;
+  top: -23px;
+  left: 139px;
+}
 .name-item{
-    padding: 10px 33px 10px 33px;
+    padding: 10px 33px 8px 33px;
     font: 18px "Myriad Pro",sans-serif;
 }
-.item span {
+.item-article {
     text-transform: uppercase;
+    /*display: block;*/
 }
 .old-price {
     color: #999999;
@@ -161,15 +179,11 @@ section:after, .catalog:after, filters:after, .catalog-container:after {
     width: 720px;
     float: left;
 }
-.col3 {
+.col3-nonborder {
     display: block;
     float: left;
     margin: 10px 10px 0 0;
     width: 218px;
-    border-top: 2px solid #e5e5e5;
-    border-bottom: 2px solid #e5e5e5;
-    border-left: 1px solid #e5e5e5;
-    border-right: 1px solid #e5e5e5;
 }
 .row143 {
     height: 143px;
@@ -185,3 +199,129 @@ img {
     height: 80px;
     margin: 20px auto;
 }
+input#polzunok {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3px;
+  padding: 0px;
+  box-shadow: 0 0 1px 1px lightgrey;
+  background: lightgrey;
+  /* overflow: hidden; */
+  user-select: text;
+  cursor: auto;
+  outline: none;
+  border-radius:27px;
+background:lightgrey;
+box-shadow: 0 1px .125em #444,
+  inset 0 1px .125em #fff;
+  margin: 20px 0;
+}
+
+input[type='range']::-webkit-slider-thumb {
+-webkit-appearance: none;
+background-color: #ecf0f1;
+border: 1px solid #bdc3c7;
+width: 1.5em;
+height: 1.5em;
+border-radius: 50%;
+cursor: pointer;
+box-shadow: 0 1px .125em #444,
+  inset 0 1px .125em #fff;
+}
+.zena_form .rangeKTL_r {
+    margin: 0 -16px 0 16px;
+    top: -17px;
+}
+.zena_form .div_input span {
+    float: left;
+    font-size: 14px;
+    color: #00753d;
+    font-weight: bold;
+    margin: 5px 0 0 0px;
+    width: 60px;
+    text-align: left;
+}
+
+.zena_form .rangeKTL_line {
+    height: 2px;
+    border: 1px solid #bbb;
+    margin: -27px auto 7px auto;
+    width: 95%;
+}
+.zena_form .rangeKTL_line_v {
+    position: relative;
+    width: 15px;
+    height: 2px;
+    background-color: #999;
+    top: 10px;
+}
+
+.zena_form .rangeKTL_l, .rangeKTL_r {
+    position: relative;
+    width: 15px;
+    height: 15px;
+    border-radius: 8px;
+    border: 1px solid #aaa;
+    cursor: pointer;
+    background: linear-gradient(to top, #fff, #bbb);
+}
+.zena_form .div_input input[type=text] {
+    outline: none;
+    width: 50px;
+    height: 18px;
+    border-radius: 4px;
+    border: 1px double #aaa;
+    background-color: #fff;
+}
+
+@media screen and (max-width: 720px) {
+  .col9 {
+    width: 74%;
+}
+.container {
+    width: 91%;
+    margin: 1.3em auto;
+}
+.col3-nonborder {
+    display: block;
+    float: left;
+    margin: 10px 10px 0 0;
+    width: 22%;
+}
+div.polzun {
+    width: 30%;
+  }
+}
+
+
+/*input {
+    -webkit-appearance: textfield;
+    background-color: white;
+    -webkit-rtl-ordering: logical;
+    user-select: text;
+    cursor: auto;
+    padding: 1px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: initial;
+    border-image: initial;
+}
+
+input, textarea, select, button {
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    margin: 0em 0em 0em 0em;
+    font: 13.3333px Arial;
+}
+
+input, textarea, select, button, meter, progress {
+    -webkit-writing-mode: horizontal-tb;
+}*/

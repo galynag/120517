@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
     <link rel="stylesheet" href="main.css">
+
 </head>
 <body>
 
@@ -13,15 +15,30 @@
         <div class="name-box">
             <h1>перфораторы</h1>
         </div>
-        <div class="filters col3">
-            <p class="row38">ФИЛЬТРЫ:</p>
+        <div class="filters col3-nonborder">
+            <p class="row38"><span class="bold">ФИЛЬТРЫ:</span></p>
             <input id="polzunok" type="range" min="0" max="30000" step="1" value="0">
             <div class="min-max-pol">
               <div class="polzun" id="min-pol">0</div>
               <p>-</p>
               <div class="polzun" id="max-pol">&#160;</div>
             </div>
-            <ul>ПРОИЗВОДИТЕЛИ:
+            <!-- нашла двойной ползунок, но нужно доработать -->
+                          <form action="./" method="get" class="zena_form">
+                          <div style="margin:20px; padding:0px; width:250px; text-align:center; border:1px dotted #999;">
+                          <div class="div_input">
+                          <span>Цена</span>
+                            <input id="id_min_1" name="min_zena" type="text" value="100" onBlur="zena_text_min_1()"  onkeyup="zena_text(this);" >
+                           - <input id="id_max_1" name="max_zena" type="text" value="2500" onBlur="zena_text_max_1()"  onkeyup="zena_text(this);"> грн
+                          </div>
+                          <div class="rangeKTL_line_v" id="rangeKTL_line_v_1" style="margin-left:16px; width:217px;"></div>
+                          <div id="rangeKTL_1-l" class="rangeKTL_l" style="left:0;" onmousedown="rangeKTL_1_l(this,event); return false;"></div>
+                          <div id="rangeKTL_1-r" class="rangeKTL_r" style="left:217px;" onmousedown="rangeKTL_1_r(this,event); return false;"></div>
+                          <div class="rangeKTL_line"></div>
+                          </div>
+                          </form>
+            <!-- конец двойной ползунок, но нужно доработать -->
+            <ul><span class="bold">ПРОИЗВОДИТЕЛИ:</span>
                 <li class="produser"><input type="checkbox">Metabo</li>
                 <li class="produser"><input type="checkbox">Титан</li>
                 <li class="produser"><input type="checkbox">Днепр-М</li>
@@ -29,18 +46,102 @@
                 <li class="produser"><input type="checkbox">TexAc</li>
                 <li class="produser"><input type="checkbox" checked>Bosch</li>
             </ul>
-            <ul>ПИТАНИЕ:
-                <li class="battary"><input type="radio" name="type-battery" value="1" checked>Аккумуляторные</li>
+            <ul><span class="bold">ПИТАНИЕ:</span>
+                <li class="battery"><input type="radio" name="type-battery" value="1" checked>Аккумуляторные</li>
                 <li class="battery"><input type="radio" name="type-battery" value="0">Сетевые</li>
             </ul>
             <button id="filter">ПОКАЗАТЬ</button>
         </div>
         <div class="catalog-container col9">
-            <div class="row38">СОРТИРОВКА: <span class="font-red">ПО ЦЕНЕ</span><div class="triangle-bottom"></div><div class="triangle-top"></div></div>
+            <div class="row38"><span class="bold">СОРТИРОВКА:</span><span class="font-red">ПО ЦЕНЕ</span><div class="triangle-bottom"></div><div class="triangle-top"></div></div>
             <div class="catalog"></div>
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+var width_px_1=217;//длина курсора.
+var zena_min_1=100;// сумма минимум
+var zena_max_1=2500;// сумма максимум
+var zena_multiply_kyrsir_1=11.059907834101; // умнодитель
+var zena_multiply_text_1=0.090416666666667; // умнодитель
+</script>
+<script type="text/javascript">
+//======== форма текстового толя=====
+function zena_text(obj) {if (/^[1234567890.']*?$/.test(obj.value)) {obj.defaultValue = obj.value;} else {obj.value = obj.defaultValue;} }
+
+function zena_text_min_1() {
+ var valuerate_min = document.getElementById('id_min_1').value;// читаем то поле с лева
+ var valuerate_max = document.getElementById('id_max_1').value;// читаем то поле с права
+ var width_px_i=document.getElementById('rangeKTL_1-r').style.left.replace('px', '');// читаем правый повзунок
+ if(valuerate_min>valuerate_max){valuerate_min=valuerate_max;}// если больше
+ if(valuerate_min<=zena_min_1){valuerate_min=zena_min_1;}// если меньше
+ document.getElementById('id_min_1').value=valuerate_min;// форма текста поле минимум с лева
+ var i=((valuerate_min-zena_min_1)*zena_multiply_text_1).toFixed(0);
+ document.getElementById("rangeKTL_1-l").style.left=i+'px';// повзунок с лева
+ document.getElementById('rangeKTL_line_v_1').style.marginLeft=i+'px';// условие для полосы с лева
+ document.getElementById('rangeKTL_line_v_1').style.width=(width_px_i-i+16)+'px';// условие для полосы с права
+}
+
+function zena_text_max_1() {
+ var valuerate_max = document.getElementById('id_max_1').value;// читаем то поле с права
+ var valuerate_min = document.getElementById('id_min_1').value;// читаем то поле с лева
+ var left_px_i=document.getElementById('rangeKTL_1-l').style.left.replace('px', '');// читаем левый повзунок
+ if(valuerate_max>zena_max_1){valuerate_max=zena_max_1;}// если больше
+ if(valuerate_max<valuerate_min){valuerate_max=valuerate_min;} //если меньше
+ document.getElementById('id_max_1').value=valuerate_max;// форма текста поле минимум с прапва
+ document.getElementById("rangeKTL_1-r").style.left=((valuerate_max-zena_min_1)*zena_multiply_text_1).toFixed(0)+'px';// повзунок с права
+ document.getElementById('rangeKTL_line_v_1').style.width=((valuerate_max-valuerate_min)*zena_multiply_text_1+16).toFixed(0)+'px';// условие для полосы с права
+
+}
+//======== форма текстового толя=====
+//======== ползунки =========
+//------- условие для всех повзунков
+function $(v) { return(document.getElementById(v)); }
+function agent(v) {return(Math.max(navigator.userAgent.toLowerCase().indexOf(v),0));}
+function xy(e,v) {return((agent('msie')?event.clientX+document.body.scrollTop:e.pageX));}
+//---- условие для всех повзунков
+//----- 1 левый min ----
+function rangeKTL_1_l(d,e) {
+ function drag(e) {
+   if(!stop) {
+   tY=xy(e)+oX-eX;
+   if(tY>=width_px_1){tY=width_px_1;}
+   var width_px_i=document.getElementById('rangeKTL_1-r').style.left.replace('px', '');
+   if(tY>=width_px_i){tY=width_px_i;}
+   if(tY<0){tY=0;}
+   d.style.left=tY+'px';
+   document.getElementById("id_min_1").value=(zena_multiply_kyrsir_1*tY+zena_min_1).toFixed(0); //--- условие для формового текстового поля
+   document.getElementById('rangeKTL_line_v_1').style.width=(width_px_i-tY)+'px';// условие для полосы с права
+   document.getElementById('rangeKTL_line_v_1').style.marginLeft=(tY+16)+'px';// условие для полосы с лева
+   }
+ }
+   oX=parseInt(d.style.left);eX=xy(e);var tX;var stop;
+   document.onmousemove=drag; document.onmouseup=function(){stop=1; 	document.onmousemove=''; 	document.onmouseup='';};
+}
+//----- 1 левый min ----
+//----- 1 правый max ----
+function rangeKTL_1_r(d,e) {
+ function drag(e) {
+   if(!stop) {
+   tY=xy(e)+oX-eX;
+   if(tY>=width_px_1){tY=width_px_1;}
+   var width_px_i=document.getElementById('rangeKTL_1-l').style.left.replace('px', '');
+   var div_line_v=document.getElementById('rangeKTL_line_v_1').style.marginLeft.replace('px', '');
+   if(tY<=width_px_i){tY=width_px_i;}
+   if(tY<0){tY=0;}
+   d.style.left=tY+'px';
+   document.getElementById("id_max_1").value=((zena_multiply_kyrsir_1*tY+zena_min_1).toFixed(0));//--- условие для формового текстового поля
+   document.getElementById('rangeKTL_line_v_1').style.width=(tY-div_line_v+16)+'px';// условие для полосы с права
+   }
+ }
+   oX=parseInt(d.style.left); eX=xy(e); var tX; var stop;
+ document.onmousemove=drag; document.onmouseup=function(){stop=1; 	document.onmousemove=''; 	document.onmouseup='';};
+}
+//----- 1 правый max ----
+</script>
+
+
 <script src="goods.js"></script>
 </body>
 </html>
